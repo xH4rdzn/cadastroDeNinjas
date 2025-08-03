@@ -1,7 +1,9 @@
-package br.com.ircoelho.CadastroDeNinjas;
+package br.com.ircoelho.CadastroDeNinjas.Ninjas;
 
+import br.com.ircoelho.CadastroDeNinjas.Missoes.MissoesModel;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -11,15 +13,24 @@ public class NinjaModel {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
+
   private String name;
+
   private String email;
+
   private int idade;
+
+  // Um ninja pode ter uma única missão
+  @ManyToOne
+  @JoinColumn(name = "missoes_id")
+  private MissoesModel missoes;
 
   public NinjaModel(String name, String email, int idade) {
     this.name = name;
     this.email = email;
     this.idade = idade;
   }
+
 
   public NinjaModel() {
   }
